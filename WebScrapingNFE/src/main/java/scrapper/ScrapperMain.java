@@ -51,19 +51,42 @@ public class ScrapperMain {
 					atributos.get(11).text() + " status: " + img, atributos.get(12).text() + " status: " + img,
 					atributos.get(13).text() + " status: " + img, atributos.get(14).text() + " status: " + img,
 					atributos.get(15).text() + " status: " + img);
-
+			
 			listagemDados.add(listagem);
 		}
+		
+		// Convertendo os objetos para Json
+		
+		/* for (ListagemDados lds : listagemDados) {
+			converterToJson(lds);
+		}*/
 		for (ListagemDados lds : listagemDados) {
 			enviarNF(converterToJson(lds));
 		}
 	}
-
+	
+	
+	// Método para converter um Objeto em um Json
+	
+	/*
+	 public static String converterToJson(ListagemDados lds){
+	 	ObjectMapper mapper = new ObjectMapper();
+	 	try{
+	 		String json = mapper.writeValueAsString(lds);
+	 		System.out.print("Objeto em JSON: " + json);
+	 	}catch(JsonProcessingException e){
+	 		e.printStackTrace();
+	 	}
+	 }
+	 * */
+	
+	// Méotodo atualizado 
 	public static String converterToJson(ListagemDados lds) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 			return mapper.writeValueAsString(lds);
 	}
-
+	
+	// Método criado para responder ao projeto NotaFiscalAPI
 	public static void enviarNF(String envioJson) throws IOException {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost httpPost = new HttpPost("http://localhost:8080/api/nf");
